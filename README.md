@@ -39,25 +39,25 @@ sudo systemctl enable --now prometheus-libvirt-exporter
 You can configure the exporter using command-line flags:
 
 - `--libvirt.uri`  
-  Libvirt URI from which to extract metrics.  
-  Default: `/var/run/libvirt/libvirt-sock-ro`
+	Libvirt URI from which to extract metrics.  
+	Default: `/var/run/libvirt/libvirt-sock-ro`
 
 - `--libvirt.driver`  
-  Libvirt driver to use.  
-  Default: `qemu:///system`
+	Libvirt driver to use.  
+	Default: `qemu:///system`
 
 - `--exporter.timeout`  
-  Maximum libvirt API call duration (e.g., `3s`).  
-  Default: `3s`
+	Maximum libvirt API call duration (e.g., `3s`).  
+	Default: `3s`
 
 - `--exporter.max-concurrent-collects`  
-  Maximum number of concurrent collects (min: 1).  
-  Adapt libvirtd `max_client_requests` according to the value chosen here  
-  Default: `4`
+	Maximum number of concurrent collects (min: 1).  
+	Adapt libvirtd `max_client_requests` according to the value chosen here  
+	Default: `4`
 
 - `--web.telemetry-path`  
-  Path under which to expose metrics.  
-  Default: `/metrics`
+	Path under which to expose metrics.  
+	Default: `/metrics`
 
 For a full list of options, run:
 
@@ -71,9 +71,9 @@ Add a scrape job to your Prometheus configuration:
 
 ```yaml
 scrape_configs:
-  - job_name: 'libvirt'
-    static_configs:
-      - targets: ['localhost:9177']
+	- job_name: 'libvirt'
+		static_configs:
+			- targets: ['localhost:9177']
 ```
 
 ## Building and running

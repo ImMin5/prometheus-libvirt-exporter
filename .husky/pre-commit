@@ -1,0 +1,23 @@
+# check goimports
+if ! command -v goimports >/dev/null 2>&1; then
+  echo "❌ goimports가 설치되어 있지 않습니다. 설치 후 다시 시도하세요."
+  echo "설치 방법: go install golang.org/x/tools/cmd/goimports@latest"
+  exit 1
+fi
+
+# check staticcheck
+if ! command -v staticcheck >/dev/null 2>&1; then
+  echo "❌ staticcheck가 설치되어 있지 않습니다. 설치 후 다시 시도하세요."
+  echo "설치 방법: go install honnef.co/go/tools/cmd/staticcheck@latest"
+  exit 1
+fi
+
+# goimports 적용
+echo "✅ goimports 실행 중..."
+goimports -w .
+
+echo "✅ goimports 실행 중..."
+goimports -w .
+
+echo "✅ staticcheck 실행 중..."
+staticcheck ./...

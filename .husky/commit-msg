@@ -1,0 +1,35 @@
+commit_msg_file=$1
+commit_msg=$(cat "$commit_msg_file")
+
+# 허용된 타입 목록
+allowed_types="feat|fix|docs|refactor|test|chore"
+
+# 커밋 메시지 형식
+pattern="^($allowed_types)\([A-Z]+-[0-9]+\): .+"
+
+# 검증
+if ! echo "$commit_msg" | grep -Eq "$pattern"; then
+  echo ""
+  echo "📌 허용된 <type> 목록:"
+  echo ""
+  printf " %-10s | %-40s\n" "type" "설명"
+  printf " %-10s | %-40s\n" "----------" "----------------------------------------"
+  printf " %-10s | %-40s\n" "feat"      "새로운 기능 추가"
+  printf " %-10s | %-40s\n" "fix"       "버그 수정"
+  printf " %-10s | %-40s\n" "docs"      "문서 변경"
+  printf " %-10s | %-40s\n" "refactor"  "코드 리팩터링 (기능 변화 없음)"
+  printf " %-10s | %-40s\n" "test"      "테스트 코드 추가/수정"
+  printf " %-10s | %-40s\n" "chore"     "빌드 수정, 패키지 매니저 수정 "
+  echo ""
+  echo ""
+  echo "🚫  커밋 메시지가 올바른 형식이 아닙니다."
+  echo ""
+  echo "🧩 올바른 형식: <type>(<JIRA_ISSUE_KEY>): <message>"
+  echo ""
+  echo "💡 예시: feat(TECHOP-123): 로그인 기능 추가"
+  echo ""
+  echo "📘 자세한 규칙은 아래 문서를 참고해주세요:"
+  echo "👉 https://ktcloud.atlassian.net/wiki/spaces/CA1/pages/305730934/5.3.+Contribution#5.-Commit-Message-%EA%B7%9C%EA%B2%A9"
+  echo ""
+  exit 1
+fi
