@@ -4,8 +4,8 @@ import (
 	"encoding/xml"
 	"fmt"
 	"regexp"
-	"time"
 	"sync"
+	"time"
 
 	"log/slog"
 
@@ -40,168 +40,168 @@ var (
 	libvirtDomainState = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_info", "state"),
 		"Code of the domain state",
-		[]string{"domain", "state_desc"},
+		[]string{"domain", "state_desc", "project_id"},
 		nil)
 	libvirtDomainInfoMaxMemDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_info", "maximum_memory_bytes"),
 		"Maximum allowed memory of the domain, in bytes.",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainInfoMemoryDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_info", "memory_usage_bytes"),
 		"Memory usage of the domain, in bytes.",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainInfoNrVirtCpuDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_info", "virtual_cpus"),
 		"Number of virtual CPUs for the domain.",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainInfoCpuTimeDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_info", "cpu_time_seconds_total"),
 		"Amount of CPU time used by the domain, in seconds.",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 
 	//domain job info
 	libvirtDomainJobTypeDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_job_info", "type"),
 		"Code of the domain job type",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainJobTimeElapsedDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_job_info", "time_elapsed_seconds"),
 		"Time elapsed since the start of the domain job",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainJobTimeRemainingDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_job_info", "time_remaining_seconds"),
 		"Time remaining until the end of the domain job",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainJobDataTotalDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_job_info", "data_total_bytes"),
 		"Data total of the domain job",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainJobDataProcessedDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_job_info", "data_processed_bytes"),
 		"Data processed of the domain job",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainJobDataRemainingDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_job_info", "data_remaining_bytes"),
 		"Data remaining of the domain job",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainJobMemTotalDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_job_info", "memory_total_bytes"),
 		"Memory total of the domain job",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainJobMemProcessedDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_job_info", "memory_processed_bytes"),
 		"Memory processed of the domain job",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainJobMemRemainingDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_job_info", "memory_remaining_bytes"),
 		"Memory remaining of the domain job",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainJobFileTotalDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_job_info", "file_total_bytes"),
 		"File total of the domain job",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainJobFileProcessedDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_job_info", "file_processed_bytes"),
 		"File processed of the domain job",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainJobFileRemainingDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_job_info", "file_remaining_bytes"),
 		"File remaining of the domain job",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 
 	//domain memory stats
 	libvirtDomainMemoryStatsCurrentBalloonBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_memory_stats", "current_balloon_bytes"),
 		"Current balloon value (in bytes).",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainMemoryStatsMaximumBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_memory_stats", "maximum_bytes"),
 		"Maximum memory used by the domain (the maximum amount of memory that can be used by the domain)",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainMemoryStatsSwapInBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_memory_stats", "swap_in_bytes"),
 		"Memory swapped in for this domain(the total amount of data read from swap space)",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainMemoryStatsSwapOutBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_memory_stats", "swap_out_bytes"),
 		"Memory swapped out for this domain (the total amount of memory written out to swap space)",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainMemoryStatsMajorFaultTotalDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_memory_stats", "major_fault_total"),
 		"Page faults occur when a process makes a valid access to virtual memory that is not available. "+
 			"When servicing the page fault, if disk IO is required, it is considered a major fault.",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainMemoryStatsMinorFaultTotalDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_memory_stats", "minor_fault_total"),
 		"Page faults occur when a process makes a valid access to virtual memory that is not available. "+
 			"When servicing the page not fault, if disk IO is required, it is considered a minor fault.",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainMemoryStatsUnusedBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_memory_stats", "unused_bytes"),
 		"Memory unused by the domain",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainMemoryStatsAvailableInBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_memory_stats", "available_bytes"),
 		"Memory available to the domain",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainMemoryStatsUsableBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_memory_stats", "usable_bytes"),
 		"Memory usable by the domain (corresponds to 'Available' in /proc/meminfo)",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainMemoryStatsLastUpdateDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_memory_stats", "last_update_timestamp_seconds"),
 		"Last time the memory stats were updated for this domain, in seconds since epoch.",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainMemoryStatsDiskCachesBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_memory_stats", "disk_caches_bytes"),
 		"Memory used by disk caches for this domain",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainMemoryStatsHugeTLBPageAllocTotalDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_memory_stats", "hugetlb_pgalloc_total"),
 		"The number of successful huge page allocations from inside the domain via virtio balloon",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainMemoryStatsHugeTLBPageFailTotalDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_memory_stats", "hugetlb_pgfail_total"),
 		"The number of failed huge page allocations from inside the domain via virtio balloon",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainMemoryStatsRssBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_memory_stats", "rss_bytes"),
 		"Resident Set Size of the process running the domain",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainMemoryStatUsedPercentDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_memory_stats", "used_percent"),
 		"The amount of memory in percent, that used by domain.",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 
 	//domain block stats
@@ -213,47 +213,47 @@ var (
 	libvirtDomainBlockStatsRdBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "read_bytes_total"),
 		"Number of bytes read from a block device, in bytes.",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 	libvirtDomainBlockStatsRdReqDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "read_requests_total"),
 		"Number of read requests from a block device.",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 	libvirtDomainBlockStatsWrBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "write_bytes_total"),
 		"Number of bytes written from a block device, in bytes.",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 	libvirtDomainBlockStatsWrReqDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "write_requests_total"),
 		"Number of write requests from a block device.",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 	libvirtDomainBlockRdTotalTimeSecondsDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "read_time_seconds_total"),
 		"Total time spent on reads from a block device, in seconds.",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 	libvirtDomainBlockWrTotalTimesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "write_time_seconds_total"),
 		"Total time spent on writes on a block device, in seconds",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 	libvirtDomainBlockFlushReqDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "flush_requests_total"),
 		"Total flush requests from a block device.",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 	libvirtDomainBlockFlushTotalTimeSecondsDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "flush_time_seconds_total"),
 		"Total time in seconds spent on cache flushing to a block device",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 	libvirtDomainBlockCapacityBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "capacity_bytes"),
 		"Logical size in bytes of the block device	backing image.",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 
 	//domain interface stats
@@ -265,74 +265,74 @@ var (
 	libvirtDomainInterfaceRxBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "receive_bytes_total"),
 		"Number of bytes received on a network interface, in bytes.",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 	libvirtDomainInterfaceRxPacketsDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "receive_packets_total"),
 		"Number of packets received on a network interface.",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 	libvirtDomainInterfaceRxErrsDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "receive_errors_total"),
 		"Number of packet receive errors on a network interface.",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 	libvirtDomainInterfaceRxDropDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "receive_drops_total"),
 		"Number of packet receive drops on a network interface.",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 	libvirtDomainInterfaceTxBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "transmit_bytes_total"),
 		"Number of bytes transmitted on a network interface, in bytes.",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 	libvirtDomainInterfaceTxPacketsDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "transmit_packets_total"),
 		"Number of packets transmitted on a network interface.",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 	libvirtDomainInterfaceTxErrsDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "transmit_errors_total"),
 		"Number of packet transmit errors on a network interface.",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 	libvirtDomainInterfaceTxDropDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "transmit_drops_total"),
 		"Number of packet transmit drops on a network interface.",
-		[]string{"domain", "target_device"},
+		[]string{"domain", "target_device", "project_id"},
 		nil)
 
 	// domain vcpu stats
 	libvirtDomainVCPUStatsCurrent = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_vcpu", "current"),
 		"Number of current online vCPUs.",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainVCPUStatsMaximum = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_vcpu", "maximum"),
 		"Number of maximum online vCPUs.",
-		[]string{"domain"},
+		[]string{"domain", "project_id"},
 		nil)
 	libvirtDomainVCPUStatsState = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_vcpu", "state"),
 		"State of the vCPU.",
-		[]string{"domain", "vcpu"},
+		[]string{"domain", "vcpu", "project_id"},
 		nil)
 	libvirtDomainVCPUStatsTime = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_vcpu", "time_seconds_total"),
 		"Time spent by the virtual CPU.",
-		[]string{"domain", "vcpu"},
+		[]string{"domain", "vcpu", "project_id"},
 		nil)
 	libvirtDomainVCPUStatsWait = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_vcpu", "wait_seconds_total"),
 		"Time the vCPU wants to run, but the host scheduler has something else running ahead of it.",
-		[]string{"domain", "vcpu"},
+		[]string{"domain", "vcpu", "project_id"},
 		nil)
 	libvirtDomainVCPUStatsDelay = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_vcpu", "delay_seconds_total"),
 		"Time the vCPU spent waiting in the queue instead of running. Exposed to the VM as steal time.",
-		[]string{"domain", "vcpu"},
+		[]string{"domain", "vcpu", "project_id"},
 		nil)
 
 	// storage pool stats
@@ -425,7 +425,7 @@ type LibvirtExporter struct {
 
 	logger *slog.Logger
 
-	timeout time.Duration
+	timeout               time.Duration
 	maxConcurrentCollects int
 }
 
@@ -438,10 +438,10 @@ type DomainStatsRecord struct {
 // NewLibvirtExporter creates a new Prometheus exporter for libvirt.
 func NewLibvirtExporter(uri string, driver libvirt.ConnectURI, logger *slog.Logger, timeout time.Duration, maxConcurrentCollects int) (*LibvirtExporter, error) {
 	return &LibvirtExporter{
-		uri:                 uri,
-		driver:              driver,
-		logger:              logger,
-		timeout:             timeout,
+		uri:                   uri,
+		driver:                driver,
+		logger:                logger,
+		timeout:               timeout,
 		maxConcurrentCollects: maxConcurrentCollects,
 	}, nil
 }
@@ -498,10 +498,10 @@ func (e *LibvirtExporter) Collect(ch chan<- prometheus.Metric) {
 // CollectFromLibvirt obtains Prometheus metrics from all domains in a libvirt setup.
 func CollectFromLibvirt(ch chan<- prometheus.Metric, uri string, driver libvirt.ConnectURI, logger *slog.Logger, timeout time.Duration, maxConcurrentCollects int) (err error) {
 	var (
-		wg sync.WaitGroup 
+		wg    sync.WaitGroup
 		pools []libvirt.StoragePool
 	)
-	
+
 	dialer := dialers.NewLocal(dialers.WithSocket(uri), dialers.WithLocalTimeout(5*time.Second))
 	l := libvirt.NewWithDialer(dialer)
 	if err = l.ConnectToURI(driver); err != nil {
@@ -659,6 +659,7 @@ func CollectDomain(ch chan<- prometheus.Metric, l *libvirt.Libvirt, domain domai
 
 	promLabels := []string{
 		domain.domainName,
+		domain.projectId,
 	}
 
 	ch <- prometheus.MustNewConstMetric(libvirtDomainInfoDesc, prometheus.GaugeValue, 1.0, infoLabels...)
