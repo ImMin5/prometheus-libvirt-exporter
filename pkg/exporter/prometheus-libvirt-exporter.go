@@ -40,7 +40,7 @@ var (
 	libvirtDomainState = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_info", "state"),
 		"Code of the domain state",
-		[]string{"domain", "state_desc", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "state_desc"},
 		nil)
 	libvirtDomainInfoMaxMemDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_info", "maximum_memory_bytes"),
