@@ -208,99 +208,99 @@ var (
 	libvirtDomainBlockStatsInfo = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "info"),
 		"Metadata information on block devices.",
-		[]string{"domain", "disk_type", "target_bus", "driver_name", "driver_type", "driver_cache", "driver_discard", "source_file", "source_protocol", "target_device", "serial"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "disk_type", "target_bus", "driver_name", "driver_type", "driver_cache", "driver_discard", "source_file", "source_protocol", "target_device", "serial"},
 		nil)
 	libvirtDomainBlockStatsRdBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "read_bytes_total"),
 		"Number of bytes read from a block device, in bytes.",
-		[]string{"domain", "target_device", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 	libvirtDomainBlockStatsRdReqDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "read_requests_total"),
 		"Number of read requests from a block device.",
-		[]string{"domain", "target_device", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 	libvirtDomainBlockStatsWrBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "write_bytes_total"),
 		"Number of bytes written from a block device, in bytes.",
-		[]string{"domain", "target_device", "project_id", "instance_id", "instance_name", "project_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 	libvirtDomainBlockStatsWrReqDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "write_requests_total"),
 		"Number of write requests from a block device.",
-		[]string{"domain", "target_device", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 	libvirtDomainBlockRdTotalTimeSecondsDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "read_time_seconds_total"),
 		"Total time spent on reads from a block device, in seconds.",
-		[]string{"domain", "target_device", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 	libvirtDomainBlockWrTotalTimesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "write_time_seconds_total"),
 		"Total time spent on writes on a block device, in seconds",
-		[]string{"domain", "target_device", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 	libvirtDomainBlockFlushReqDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "flush_requests_total"),
 		"Total flush requests from a block device.",
-		[]string{"domain", "target_device", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 	libvirtDomainBlockFlushTotalTimeSecondsDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "flush_time_seconds_total"),
 		"Total time in seconds spent on cache flushing to a block device",
-		[]string{"domain", "target_device", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 	libvirtDomainBlockCapacityBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_block_stats", "capacity_bytes"),
 		"Logical size in bytes of the block device	backing image.",
-		[]string{"domain", "target_device", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 
 	//domain interface stats
 	libvirtDomainInterfaceInfo = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "info"),
 		"Metadata on network interfaces.",
-		[]string{"domain", "interface_type", "source_bridge", "target_device", "mac_address", "model_type", "mtu_size"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "interface_type", "source_bridge", "target_device", "mac_address", "model_type", "mtu_size"},
 		nil)
 	libvirtDomainInterfaceRxBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "receive_bytes_total"),
 		"Number of bytes received on a network interface, in bytes.",
-		[]string{"domain", "target_device", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 	libvirtDomainInterfaceRxPacketsDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "receive_packets_total"),
 		"Number of packets received on a network interface.",
-		[]string{"domain", "target_device", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 	libvirtDomainInterfaceRxErrsDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "receive_errors_total"),
 		"Number of packet receive errors on a network interface.",
-		[]string{"domain", "target_device", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 	libvirtDomainInterfaceRxDropDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "receive_drops_total"),
 		"Number of packet receive drops on a network interface.",
-		[]string{"domain", "target_device", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 	libvirtDomainInterfaceTxBytesDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "transmit_bytes_total"),
 		"Number of bytes transmitted on a network interface, in bytes.",
-		[]string{"domain", "target_device", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 	libvirtDomainInterfaceTxPacketsDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "transmit_packets_total"),
 		"Number of packets transmitted on a network interface.",
-		[]string{"domain", "target_device", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 	libvirtDomainInterfaceTxErrsDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "transmit_errors_total"),
 		"Number of packet transmit errors on a network interface.",
-		[]string{"domain", "target_device", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 	libvirtDomainInterfaceTxDropDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_interface_stats", "transmit_drops_total"),
 		"Number of packet transmit drops on a network interface.",
-		[]string{"domain", "target_device", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "target_device"},
 		nil)
 
 	// domain vcpu stats
@@ -317,22 +317,22 @@ var (
 	libvirtDomainVCPUStatsState = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_vcpu", "state"),
 		"State of the vCPU.",
-		[]string{"domain", "vcpu", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "vcpu"},
 		nil)
 	libvirtDomainVCPUStatsTime = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_vcpu", "time_seconds_total"),
 		"Time spent by the virtual CPU.",
-		[]string{"domain", "vcpu", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "vcpu"},
 		nil)
 	libvirtDomainVCPUStatsWait = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_vcpu", "wait_seconds_total"),
 		"Time the vCPU wants to run, but the host scheduler has something else running ahead of it.",
-		[]string{"domain", "vcpu", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "vcpu"},
 		nil)
 	libvirtDomainVCPUStatsDelay = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain_vcpu", "delay_seconds_total"),
 		"Time the vCPU spent waiting in the queue instead of running. Exposed to the VM as steal time.",
-		[]string{"domain", "vcpu", "project_id", "project_name", "instance_id", "instance_name"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "vcpu"},
 		nil)
 
 	// storage pool stats
@@ -373,7 +373,7 @@ var (
 	libvirtDomainOpenstackInfoDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain", "openstack_info"),
 		"OpenStack Metadata labels for the domain.",
-		[]string{"domain", "instance_name", "instance_id", "flavor_name", "user_name", "user_id", "project_name", "project_id"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "flavor_name", "user_name", "user_id"},
 		nil)
 
 	domainState = map[libvirt_schema.DomainState]string{

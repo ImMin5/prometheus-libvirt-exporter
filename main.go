@@ -61,6 +61,7 @@ func main() {
 	logger.Info("Timeout value", "timeout_value", *timeout)
 	logger.Info("Max concurrent collects", "max_concurrent_collects", *maxConcurrentCollects)
 
+	// libvirt exporter registration to prometheus
 	exporter, err := exporter.NewLibvirtExporter(*libvirtURI, libvirt.ConnectURI(*driver), logger, *timeout, *maxConcurrentCollects)
 	if err != nil {
 		panic(err)
