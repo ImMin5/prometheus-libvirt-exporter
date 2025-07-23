@@ -373,7 +373,7 @@ var (
 	libvirtDomainOpenstackInfoDesc = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "domain", "openstack_info"),
 		"OpenStack Metadata labels for the domain.",
-		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "flavor_name", "user_name", "user_id"},
+		[]string{"domain", "project_id", "project_name", "instance_id", "instance_name", "flavor_name", "user_id", "user_name"},
 		nil)
 
 	domainState = map[libvirt_schema.DomainState]string{
@@ -641,13 +641,13 @@ func CollectDomain(ch chan<- prometheus.Metric, l *libvirt.Libvirt, domain domai
 
 	openstackInfoLabels := []string{
 		domain.domainName,
-		domain.instanceName,
-		domain.instanceId,
-		domain.flavorName,
-		domain.userName,
-		domain.userId,
-		domain.projectName,
 		domain.projectId,
+		domain.projectName,
+		domain.instanceId,
+		domain.instanceName,
+		domain.flavorName,
+		domain.userId,
+		domain.userName,
 	}
 
 	infoLabels := []string{
